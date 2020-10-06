@@ -1,6 +1,6 @@
-# protclus - A small Python3 library for protein complex discovery with topological clustering techniques on PPI networks
+# protclus - A small Python 3 library for protein complex discovery in PPI networks
 
-This is a Python3 library containing clustering algorithms chiefly used for protein complex discovery in PPI networks. It is inspired by the collection of Python2 modules in https://github.com/trueprice/python-graph-clustering (which is unfortunately due to deprecate in 2021), but updated for Python3 and rewritten as a class-based library. As a result it is significantly easier to import and integrate into projects. Additionally it benefits from some additional flexibility in the output and some improvements on the speed of the algorithms. 
+This is a Python 3 library containing clustering algorithms chiefly used for protein complex discovery in protein-protein interaction (PPI) networks. It is inspired by the collection of Python 2 modules in https://github.com/trueprice/python-graph-clustering (which is unfortunately due to deprecate in 2021), but updated for Python3 and rewritten as a class-based library. As a result it is significantly easier to import and integrate into projects. Additionally it benefits from some additional flexibility in the output and some improvements on the speed of the algorithms. 
 
 ## Prerequisites
 - Python 3.6+
