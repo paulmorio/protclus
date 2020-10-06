@@ -12,7 +12,8 @@ pip install protclus
 ```
 ## Citation
 If this work was of use to you please cite the original authors of each of the algorithms and the previous Python2 module authors.
-Additionally please consider citing the following paper, as this library was built in conjunction.
+
+Additionally please consider citing the following paper, as this library was developed as part of the project surrounding it.
 
 ```
 @misc{protclus,
