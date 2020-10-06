@@ -15,7 +15,7 @@ class ClusterAlg(object):
         self.clusters = []
 
     def __str__(self):
-        return (f"Clustering Algorithm on {self.filename}")
+        return (f"Clustering algorithm on {self.filename}")
 
     def save_clusters(self, filehandle):
         """Saves clusters, one cluster per line into the input filehandle"""
