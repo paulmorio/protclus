@@ -7,9 +7,22 @@ This is a Python 3 library containing clustering algorithms chiefly used for pro
 - NetworkX 2.3+
 
 ## Installation
+Installation from PyPI
+
 ```bash
 pip install protclus
 ```
+
+Installation from source from the project root folder where `setup.py` is found
+```bash
+pip install -e .
+```
+
+Testing
+```bash
+python setup.py test
+```
+
 ## Citation
 If this work was of use to you please cite the original authors of each of the algorithms and the previous Python2 module authors.
 
