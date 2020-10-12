@@ -15,7 +15,7 @@ setup(name="protclus",
     install_requires=['numpy', 'tqdm', 'networkx'],
     
     test_suite="nose.collector",
-    tests_require=["nose", "nose-cover3"],
+    tests_require=["pytest", "pytest-cov", "mock"],
     packages=find_packages(),
     include_package_data=True,
     classifiers=['Topic :: Scientific/Engineering :: Artificial Intelligence',
