@@ -9,7 +9,7 @@ import sys
 from itertools import combinations
 from collections import defaultdict
 
-from cluster_alg import ClusterAlg
+from .cluster_alg import ClusterAlg
 
 # dictionary type that returns zero for missing values
 # used here in 'edges' dictionary
