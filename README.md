@@ -8,14 +8,14 @@ It is inspired by the collection of Python 2 scripts in https://github.com/truep
 
 ### Currently Included
 
-- MCODE
-- DPCLUS
+- ***MCODE*** by Gary D. Bader and Christopher W. V. Hogue "An automated method for finding molecular complexes in large protein interaction networks."
+- ***DPCLUS*** by Md Altaf-Ul-Amin et al. "Development and implementation of an algorithm for detection of protein complexes in large interaction networks."
 
 ### Coming Soon
 
-- IPCA
-- COACH
-- Graph Entropy
+- ***IPCA*** by Min Li, Jian-er Chen, Jian-xin Wang, Bin Hu, and Gang Chen. Modifying the dpclus algorithm for identifying protein complexes based on new topological structures.
+- ***COACH*** by by Min Wu, Xiaoli Li, Chee-Keong Kwoh, and See-Kiong Ng. "A core-attachment based method to detect protein complexes in ppi networks."
+- ***Graph Entropy*** by E. C. Kenley and Y. Cho "Entropy-Based Graph Clustering: Application to Biological and Social Networks"
 
 ## Prerequisites
 - Python 3.6+
