@@ -6,7 +6,6 @@
 
 import sys
 from collections import defaultdict
-from tqdm import tqdm
 
 from .cluster_alg import ClusterAlg
 
@@ -35,7 +34,7 @@ class MCODE(ClusterAlg):
         # Stage 1: Vertex Weighting
         print ('## Weighting vertices...')
         weights = dict((v, 1.) for v in edges)
-        for i, v in tqdm(enumerate(edges)):
+        for i, v in enumerate(edges):
             neighborhood = set((v,)) | edges[v]
             # if node has only one neighbor, we know everything we need to know
             if len(neighborhood) <= 2:
