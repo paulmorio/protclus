@@ -39,7 +39,7 @@ class DPCLUS(ClusterAlg):
         b_list = [] # the original algorithm indexes column b after column a... >:-(
 
         # read in graph
-        with open(filename, 'r') as f:
+        with open(self.filename, 'r') as f:
             for line in f:
                 a,b = line.split()[:2]
                 data[a].add(b)
@@ -171,8 +171,8 @@ class DPCLUS(ClusterAlg):
             clusters.append(cluster)
             self.clusters = clusters
 
-if __name__ == '__main__':
-    filename = "../data/unweighted_example_network.txt"
-    c = DPCLUS(filename)
-    c.cluster()
-    c.save_clusters("/tmp/dpclus_test.txt")
+# if __name__ == '__main__':
+#     filename = "../data/unweighted_example_network.txt"
+#     c = DPCLUS(filename)
+#     c.cluster()
+#     c.save_clusters("/tmp/dpclus_test.txt")
