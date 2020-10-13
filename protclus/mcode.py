@@ -8,7 +8,7 @@ import sys
 from collections import defaultdict
 from tqdm import tqdm
 
-from cluster_alg import ClusterAlg
+from .cluster_alg import ClusterAlg
 
 
 class MCODE(ClusterAlg):
