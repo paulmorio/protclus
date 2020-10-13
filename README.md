@@ -1,6 +1,8 @@
-# protclus - A small Python 3 library for protein complex discovery in PPI networks
+# protclus - Minimal Python 3 library for Protein Complex Discovery in PPI Networks
 
-This is a Python 3 library containing clustering algorithms chiefly used for protein complex discovery in protein-protein interaction (PPI) networks. It is inspired by the collection of Python 2 modules in https://github.com/trueprice/python-graph-clustering (which is unfortunately due to deprecate in 2021), but updated for Python3 and rewritten as a class-based library. As a result it is significantly easier to import and integrate into projects. Additionally it benefits from some additional flexibility in the output and some improvements on the speed of the algorithms. 
+This is a Python 3 library containing clustering algorithms chiefly used for protein complex discovery in protein-protein interaction (PPI) networks. 
+
+It is inspired by the collection of Python 2 scripts in https://github.com/trueprice/python-graph-clustering (which is unfortunately due to deprecate in 2021) --- but updated for Python 3 and rewritten to as a set of classes and methods. As a result it is significantly easier to import and integrate into projects. Additionally it benefits from some additional flexibility in the output and some improvements on the speed of the algorithms.
 
 ## Methods
 
@@ -26,20 +28,21 @@ Installation from PyPI
 pip install protclus
 ```
 
-Installation from source from the project root folder where `setup.py` is found
+Installation from source from the project root folder where `setup.py` can be done via
 ```bash
 pip install -e .
 ```
 
-Testing
+### Testing
+
 ```bash
 python setup.py test
 ```
 
 ## Citation
-If this work was of use to you please cite the original authors of each of the algorithms and the previous Python2 module authors.
+If this work was of use to you please cite the original authors of each of the algorithms and the previous Python2 script authors.
 
-Additionally please consider citing the following paper, as this library was developed as part of the project surrounding it.
+Additionally please consider citing the following paper, as this library was developed as part of
 
 ```
 @misc{protclus,
