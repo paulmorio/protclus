@@ -9,22 +9,23 @@
 import sys
 from itertools import combinations
 from collections import defaultdict
+from py27hash.dict import Dict
+from py27hash.set import Set
 
 T_IN = 0.5
-
-# dictionary type that returns zero for missing values
-# used here in 'edges' dictionary
-class zerodict(dict):
-    def __missing__(self, k):
-        return 0
+# SP = 2 # hard-coded, mostly for efficiency
 
 def ipca(filename):
-    data = defaultdict(set) # node id => neighboring node ids
+    data = defaultdict(Set) # node id => neighboring node ids
 
     # read in graph
     with open(filename, 'r') as f:
+        counter = 0
         for line in f:
             a,b = line.split()[:2]
+            print(a,b)
+            print(counter)
+            counter += 1
             data[a].add(b)
             data[b].add(a)
 
@@ -35,20 +36,22 @@ def ipca(filename):
         weights[a] += shared
         weights[b] += shared
 
-    unvisited = set(data)
+    unvisited = Set(data)
     num_clusters = 0
-
-    seed_nodes = sorted(data,key=lambda k: (weights[k],len(data[k])),reverse=True)
+    clusters = []
+    
+    # Potential culprit
+    seed_nodes = sorted(data, key=lambda k: (weights[k],len(data[k])), reverse=True)
 
     for seed in seed_nodes: # get highest degree node
         if seed not in unvisited: continue
 
-        cluster = set((seed,iter(data[seed]).next())) # seed and random neighbor
+        cluster = Set((seed,next(iter(data[seed])))) # seed and random neighbor
 
         while True:
             # rank neighbors by the number of edges between the node and cluster nodes
             frontier = sorted((len(data[p] & cluster),p) for p in
-                set.union(*((data[n] - cluster) for n in cluster)))
+                Set.union(*((data[n] - cluster) for n in cluster)))
 
             # do this until IN_vk < T_IN, SP <= 2 is met, or no frontier nodes left
             found = False
@@ -72,10 +75,14 @@ def ipca(filename):
         num_clusters += 1
         print (num_clusters, len(cluster), len(unvisited))
 
+        clusters.append(cluster)
+
         if not unvisited: break
 
 if __name__ == '__main__':
     import sys
 
     ipca(sys.argv[1])
+ 
+
  
