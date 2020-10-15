@@ -6,6 +6,11 @@
 
 from collections import defaultdict
 from itertools import combinations
+from functools import reduce
+from py27hash.dict import Dict
+from py27hash.set import Set
+from tqdm import tqdm
+
 
 DENSITY_THRESHOLD = 0.7
 AFFINITY_THRESHOLD = 0.225
@@ -13,12 +18,12 @@ CLOSENESS_THRESHOLD = 0.5
 
 # return average degree and density for a graph
 def graph_stats(graph):
-    avg_deg = sum(len(n) for n in graph.itervalues()) / float(len(graph))
+    avg_deg = sum(len(n) for n in graph.values()) / float(len(graph))
     density = avg_deg / (len(graph)-1)
     return avg_deg, density
 
 # return core nodes, given a graph and its average degree
-get_core_nodes = lambda g,avg: set(v for v,n in g.iteritems() if len(n) >= avg)
+get_core_nodes = lambda g,avg: Set(v for v,n in g.items() if len(n) >= avg)
 
 # return NA score
 NA_score = lambda a,b: float(len(a & b)**2) / (len(a) * len(b))
@@ -36,7 +41,7 @@ def core_removal(graph):
         core_nodes = get_core_nodes(graph, avg_deg)
         result = []
         subgraphs = []
-        for v,n in graph.iteritems():
+        for v,n in graph.items():
             if v in core_nodes: continue
             n = n - core_nodes # note that we're reassigning n
             for s in subgraphs:
@@ -44,7 +49,7 @@ def core_removal(graph):
                     s |= n
                     break
             else:
-                subgraphs.append(n | set([v]))
+                subgraphs.append(n | Set([v]))
         # connected subcomponent joining
         i = 0
         while i < len(subgraphs) - 1:
@@ -58,10 +63,10 @@ def core_removal(graph):
             i += 1
         # recursive core removal
         for s in subgraphs:
-            tresults = core_removal(dict((v,graph[v] & s) for v in s))
+            tresults = core_removal(Dict((v,graph[v] & s) for v in s))
             for tc in tresults:
-                nodes = set()
-                for v,n in tc.iteritems():
+                nodes = Set()
+                for v,n in tc.items():
                     nodes.add(v)
                     n |= graph[v] & core_nodes
                 for c in core_nodes:
@@ -71,20 +76,32 @@ def core_removal(graph):
 
 def coach(filename):
     # read protein-protein pairs
-    data = defaultdict(set)
+    # data = defaultdict(Set)
+
+    data = Dict()
+
     with open(filename, 'r') as f:
         for line in f:
             a,b = line.split()[:2]
-            data[a].add(b)
-            data[b].add(a)
+
+            if a in data:
+                data[a].add(b)
+            else:
+                data[a] = Set()
+                data[a].add(b)
+            if b in data:
+                data[b].add(a)
+            else:
+                data[b] = Set()
+                data[b].add(a)
 
     # step 1: find preliminary cores
     SC = [] # currently-detected preliminary cores
     count = 0
-    for vertex,neighbors in data.iteritems():
+    for vertex,neighbors in tqdm(data.items()):
         # build neighborhood graph
-        vertices = set([vertex]) | neighbors
-        size1_neighbors = set()
+        vertices = Set([vertex]) | neighbors
+        size1_neighbors = Set()
         graph = { }
         for v in vertices:
             n = data[v] & vertices
@@ -99,14 +116,14 @@ def coach(filename):
         # get core graph
         avg_deg,density = graph_stats(graph)
         core_nodes = get_core_nodes(graph, avg_deg)
-        vertices = set(graph.iterkeys())
+        vertices = Set(graph.keys())
         for v in vertices - core_nodes:
             del graph[v]
-        for n in graph.itervalues():
+        for n in graph.values():
             n &= core_nodes
         if len(graph) < 2: # not enough connections in this graph
             continue
-        graph_nodes = set(graph)
+        graph_nodes = Set(graph)
 
         # inner loop
         for sg in core_removal(graph):
@@ -114,17 +131,17 @@ def coach(filename):
                 _,density = graph_stats(sg)
                 # if density threshold met, stop; else, remove min degree node
                 if density >= DENSITY_THRESHOLD: break
-                w = min(sg.iteritems(), key=lambda k: len(k[1]))[0]
+                w = min(sg.items(), key=lambda k: len(k[1]))[0]
                 del sg[w]
-                for n in sg.itervalues():
+                for n in sg.values():
                     n.discard(w)
 
-            sg_nodes = set(sg)
+            sg_nodes = Set(sg)
             while graph_nodes - sg_nodes:
                 w = max(graph_nodes - sg_nodes,
                         key=lambda v: len(graph[v] & sg_nodes))
                 new_sg = sg.copy()
-                for v,n in new_sg.iteritems():
+                for v,n in new_sg.items():
                     if w in graph[v]:
                         n.add(w)
                 new_sg[w] = graph[w] & sg_nodes
@@ -135,8 +152,8 @@ def coach(filename):
 
             # redundancy filtering
             max_sim = -1
-            for i in xrange(len(SC)):
-                sim = NA_score(set(SC[i]), sg_nodes)
+            for i in range(len(SC)):
+                sim = NA_score(Set(SC[i]), sg_nodes)
                 if sim > max_sim:
                     max_sim = sim
                     index = i
@@ -148,18 +165,23 @@ def coach(filename):
                     SC[index] = sg
 
     # step 2: adding peripheral proteins
-    clusters = set()
+    clusters = Set()
     for core in SC:
         nodes = frozenset(core)
         neighbors = reduce(lambda x,y: x|y, (data[v] for v in nodes)) - nodes
-        neighbors -= set(v for v in neighbors
+        neighbors -= Set(v for v in neighbors
           if float(len(data[v] & nodes)) / len(nodes) <= CLOSENESS_THRESHOLD)
-        clusters.add(nodes | neighbors)
+        print(nodes)
+        print(neighbors)
+        print(nodes | neighbors)
+        clusters.add(tuple(nodes | neighbors))
 
     return clusters
 
 if __name__ == '__main__':
     import sys
+    counter = 1
     for c in coach(sys.argv[1]):
+        print (counter)
         print (' '.join(c))
-
+        counter += 1
