@@ -4,6 +4,18 @@ This is a Python 3 library containing clustering algorithms chiefly used for pro
 
 It is inspired by the collection of Python 2 scripts in https://github.com/trueprice/python-graph-clustering (which is unfortunately due to deprecate in 2021) --- but updated for Python 3 and rewritten to as a set of classes and methods. As a result it is significantly easier to import and integrate into projects. Additionally it benefits from some additional flexibility in the output and some improvements on the speed of the algorithms.
 
+It benefits from extremely simple usage that is shared between all of the methods
+
+```python
+# Example using MCODE
+filename = "data/unweighted_example_network.txt"
+c = MCODE(filename)
+c.cluster()
+
+print(c.clusters())
+c.save_clusters("mcode_example_clusters.txt")
+```
+
 ## Methods
 
 ### Currently Included
