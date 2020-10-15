@@ -28,10 +28,6 @@ c.save_clusters("mcode_example_clusters.txt")
 ### Coming Soon
 - ***Graph Entropy*** by E. C. Kenley and Y. Cho "Entropy-Based Graph Clustering: Application to Biological and Social Networks"
 
-## Prerequisites
-- Python 3.6+
-- NetworkX 2.3+
-
 ## Installation
 Installation from PyPI
 
