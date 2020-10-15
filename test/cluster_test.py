@@ -1,6 +1,6 @@
 import numpy as np
 import networkx as nx
-from protclus import MCODE, DPCLUS, IPCA
+from protclus import MCODE, DPCLUS, IPCA, COACH
 
 unweighted_filename = "data/unweighted_example_network.txt"
 
@@ -34,3 +34,12 @@ def test_ipca_cluster():
     c.cluster()
     assert len(c.clusters) == 2806
     assert len(c.clusters[-1]) == 23
+
+def test_coach_cluster():
+    """
+    ## Testing COACH on unweighted network
+    """
+    c = COACH(unweighted_filename)
+    assert len(c.clusters)==0
+    c.cluster()
+    assert len(c.clusters) >= 1800
