@@ -12,7 +12,7 @@ setup(name="protclus",
     author="Paul Scherer",
     author_email="paul.geo2dr@gmail.com",
     license="MIT",
-    install_requires=['numpy', 'tqdm', 'networkx'],
+    install_requires=['numpy', 'tqdm', 'networkx', 'py27hash'],
     
     test_suite="nose.collector",
     tests_require=["pytest", "pytest-cov", "mock"],
