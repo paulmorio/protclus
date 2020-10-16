@@ -3,8 +3,8 @@
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 ![PyPI](https://img.shields.io/pypi/v/protclus)
 ![PyPI - License](https://img.shields.io/pypi/l/protclus)
-<!-- [![Build Status](https://travis-ci.org/paulmorio/protclus.svg?branch=master)](https://travis-ci.org/paulmorio/protclus) -->
-<!-- ![Codecov](https://img.shields.io/codecov/c/github/paulmorio/protclus) -->
+[![Build Status](https://travis-ci.org/paulmorio/protclus.svg?branch=master)](https://travis-ci.org/paulmorio/protclus)
+![Codecov](https://img.shields.io/codecov/c/github/paulmorio/protclus)
 
 This is a Python 3 library containing clustering algorithms chiefly used for protein complex discovery in protein-protein interaction (PPI) networks. 
 
