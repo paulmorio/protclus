@@ -1,6 +1,6 @@
 sudo: required
 dist: bionic
-langauge: python
+language: python
 virtualenv:
   system_site_packages: true
 python:
