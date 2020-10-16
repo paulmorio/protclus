@@ -4,7 +4,7 @@ with open('README.md') as f:
     long_description = f.read()
 
 setup(name="protclus",
-    version="0.7.0",
+    version="0.9.1",
     description="protclus: Library for protein complex discovery on PPI networks",
     long_description=long_description,
     long_description_content_type="text/markdown",
