@@ -8,6 +8,7 @@ It benefits from extremely simple usage that is shared between all of the method
 
 ```python
 # Example using MCODE
+from protclus import MCODE
 filename = "data/unweighted_example_network.txt"
 c = MCODE(filename)
 c.cluster()
