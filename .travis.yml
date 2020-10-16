@@ -1,0 +1,19 @@
+sudo: required
+dist: bionic
+langauge: python
+virtualenv:
+  system_site_packages: true
+python:
+  - '3.6'
+  - '3.7'
+  - '3.8'
+install:
+  - pip install -e .
+  - pip install pytest pytest-cov
+script: 
+  - pytest --cov=usualsuspects
+after_script: 
+  - cd ~
+  - codecov
+after_success:
+  - bash <(curl -s https://codecov.io/bash)

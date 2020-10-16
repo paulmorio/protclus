@@ -13,7 +13,7 @@ filename = "data/unweighted_example_network.txt"
 c = MCODE(filename)
 c.cluster()
 
-print(c.clusters())
+print(c.clusters)
 c.save_clusters("mcode_example_clusters.txt")
 ```
 
